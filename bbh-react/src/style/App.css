@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+.avatar {
+  border-radius: 50%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+code {
+  font-size: 1.2em;
+}
+
+ul {
+  padding-inline-start: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.square {
+  background: #fff;
+  border: 3px solid #999;
+  float: left;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 52px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 52px;
+}
+
+.board-row:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.status {
+  margin-bottom: 24px;
+}
+
+.game {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.game-info {
+  margin-left: 100px;
+}
+
+
+
+.monospace-font {
+    font-family: 'VT323', monospace; 
+}
+
+.dashboard-glow-blue {
+    box-shadow: 0 0 5px #3b82f6, 0 0 10px rgba(59, 130, 246, 0.7);
+}
+
+.dashboard-glow-red {
+    box-shadow: 0 0 5px #ef4444, 0 0 10px rgba(239, 68, 68, 0.7);
+}
+
+.dashboard-glow-green {
+    box-shadow: 0 0 3px #10b981, 0 0 6px rgba(16, 185, 129, 0.5);
+}
