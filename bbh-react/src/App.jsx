@@ -4,6 +4,7 @@ import Profile from "./common/user";
 import { Produit } from "./common/product";
 import { useState } from "react";
 import { Game} from "./common/morpion.jsx";
+import Market, { FilterableProductTable } from "./common/market.jsx";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -45,8 +46,8 @@ function App() {
       <div className="border-3 border-black bg-slate-600 py-7 w-[1000px] flex justify-center mx-auto">
         <Game />
       </div>
-      <div>
-      
+      <div className="flex justify-center item-center text-center border-2 border-black w-[450px] flex-col mx-auto mt-12 bg-white ">
+        <Market />
       </div>
       <footer className="h-16 bg-gray-800/90 backdrop-blur mt-12 flex justify-center px-4 shadow-xl z-20 text-center items-center font-medium text-gray-300 border-t border-gray-700">
         &copy; 2025 - Ceci est un footer simple.
