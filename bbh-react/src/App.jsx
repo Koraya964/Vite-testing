@@ -1,58 +1,72 @@
-import "./style/App.css";
-import { MyButton } from "./common/button"; // vérifier le que l'import soit en .jsx
-import Profile from "./common/user";
-import { Produit } from "./common/product";
-import { useState } from "react";
-import { Game} from "./common/morpion.jsx";
-import Market, { FilterableProductTable } from "./common/market.jsx";
+// src/App.jsx
+
+import React, { useState } from 'react';
+import { Routes, Route, Outlet } from 'react-router-dom';
+
+// Importations des composants de structure
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Sidebar from "./components/Sidebar";
+import Background from "./components/Background";
+
+// Importation des pages (à créer/migrer)
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import Monitoring from "./pages/Monitoring";
+import MonEspace from "./pages/MonEspace";
+
+// Design
+
+import ./
+
+// Composant Layout : gère la structure fixe (Header, Footer, Fond)
+const Layout = ({ sidebarOpen, openSidebar, closeSidebar }) => (
+  // Ceci remplace la balise <body> et englobe toute l'application
+  <div className="h-screen flex flex-col text-white relative">
+    
+    <Background /> 
+    
+    <Header onOpenSidebar={openSidebar} />
+    
+    {/* L'élément <Outlet /> de React Router affiche le contenu de la Route active (ex: <Home />) */}
+    <Outlet /> 
+
+    <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
+    
+    <Footer />
+  </div>
+);
+
+
 function App() {
-  const [count, setCount] = useState(0);
+  // État pour gérer l'ouverture/fermeture de la sidebar
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  function SupportClic() {
-    setCount(count + 1);
-  }
+  const openSidebar = () => setIsSidebarOpen(true);
+  const closeSidebar = () => setIsSidebarOpen(false);
+  
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      <header className="h-16 w-full bg-gray-800/90 backdrop-blur flex justify-center px-4 shadow-xl z-20 text-center items-center text-2xl font-extrabold text-white border-b-2 border-indigo-500">
-        Bienvenue sur React
-      </header>
+    <Routes>
+      {/* Route parent pour la mise en page (Layout) */}
+      <Route 
+        element={<Layout sidebarOpen={isSidebarOpen} openSidebar={openSidebar} closeSidebar={closeSidebar} />}
+      >
+        {/* Routes enfants (Pages) */}
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/monitoring" element={<Monitoring />} />
+        <Route path="/espace" element={<MonEspace />} />
 
-      <main className="flex-1 p-6 pt-24 w-full flex items-center justify-center">
-        <div className="bg-white p-10 sm:p-12 rounded-2xl shadow-2xl space-y-8 w-full text-center max-w-[900px]">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800">
-            Bienvenue sur la page React de{" "}
-            <span className="text-indigo-600">Julien</span>
-          </h1>
-
-          <p className="text-gray-600 text-lg">
-            Un aperçu d'une application moderne construite avec React et
-            Tailwind CSS.
-          </p>
-
-          <div className="pt-4 items-center">
-            <h1 className="uppercase text-2xl font-bold">Les compteurs :</h1>
-            <MyButton count={count} onClick={SupportClic}  />
-            <br className="mb-6 mt-6" />
-            <MyButton count={count} onClick={SupportClic}  />
-          </div>
-          <div>
-            <Profile />
-          </div>
-        </div>
-      </main>
-      <div className="flex justify-center items-center mb-12 bg-slate-400 min-w-[250px] rounded-3xl mx-auto">
-        <Produit />
-      </div>
-      <div className="border-3 border-black bg-slate-600 py-7 w-[1000px] flex justify-center mx-auto">
-        <Game />
-      </div>
-      <div className="flex justify-center item-center text-center border-2 border-black w-[450px] flex-col mx-auto mt-12 bg-white ">
-        <Market />
-      </div>
-      <footer className="h-16 bg-gray-800/90 backdrop-blur mt-12 flex justify-center px-4 shadow-xl z-20 text-center items-center font-medium text-gray-300 border-t border-gray-700">
-        &copy; 2025 - Ceci est un footer simple.
-      </footer>
-    </div>
+        {/* Routes pour les pages non migrées (Placeholders) */}
+        <Route path="/about" element={<div className="flex-1 p-6 text-center">Page À Propos (Bientôt)</div>} />
+        <Route path="/download" element={<div className="flex-1 p-6 text-center">Page Téléchargement (Bientôt)</div>} />
+        <Route path="/certification" element={<div className="flex-1 p-6 text-center">Page Certification (Bientôt)</div>} />
+        <Route path="/settings" element={<div className="flex-1 p-6 text-center">Page Paramètres (Bientôt)</div>} />
+        <Route path="/legal" element={<div className="flex-1 p-6 text-center">Page Mentions Légales (Bientôt)</div>} />
+        <Route path="/privacy" element={<div className="flex-1 p-6 text-center">Page Confidentialité (Bientôt)</div>} />
+        <Route path="*" element={<div className="flex-1 p-6 text-center">Page non trouvée (404)</div>} />
+      </Route>
+    </Routes>
   );
 }
 
